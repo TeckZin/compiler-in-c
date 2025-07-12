@@ -1,0 +1,20 @@
+<expression> ::= <term> <operator> <term>
+
+<statement> ::= <keyword> <identifier> <assignment> <term>
+             | <identifier> <assignment> <term>
+
+<term> ::= <number> | <identifier>
+
+<number> ::= <digit> { <digit> }
+
+<digit> ::= "0" | "1" | ... | "9"
+
+<identifier> ::= <letter> { <letter> | <digit> }
+
+<letter> ::= "a" | ... | "z" | "A" | ... | "Z"
+
+<operator> ::= "+" | "-" | "*" | "/"
+
+<assignment> ::= "="
+
+<keyword> ::= "let" | "var"
