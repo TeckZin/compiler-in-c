@@ -36,7 +36,6 @@ typedef struct {
   int line;
   int col;
   const char *filename;
-
 } Lexer;
 
 typedef struct {
