@@ -4,6 +4,8 @@
 #include "../lexer/lexer.h"
 #include <stdbool.h>
 
+#define EBNF_PATH "../../../grammar.ebnf"
+
 typedef struct {
   Lexer *lexer;
   TokenType curr;
