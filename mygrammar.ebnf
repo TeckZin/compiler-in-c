@@ -1,20 +1,19 @@
-<expression> ::= <term> <operator> <term>
+<program>    ::= { <statement> }
 
-<statement> ::= <keyword> <identifier> <assignment> <term>
-             | <identifier> <assignment> <term>
+<statement>  ::= <keyword> <identifier> <assignment> <expression> ";"
+               | <identifier> <assignment> <expression> ";"
 
-<term> ::= <number> | <identifier>
+<expression> ::= <term> { <operator> <term> }
 
-<number> ::= <digit> { <digit> }
+<term>       ::= <number>
+               | <identifier>
 
-<digit> ::= "0" | "1" | ... | "9"
-
+<number>     ::= <digit> { <digit> }
+<digit>      ::= "0" | "1" | ... | "9"
 <identifier> ::= <letter> { <letter> | <digit> }
+<letter>     ::= "a" | ... | "z" | "A" | ... | "Z"
 
-<letter> ::= "a" | ... | "z" | "A" | ... | "Z"
-
-<operator> ::= "+" | "-" | "*" | "/"
-
+<operator>   ::= "+" | "-" | "*" | "/"
 <assignment> ::= "="
+<keyword>    ::= "let" | "var"
 
-<keyword> ::= "let" | "var"

@@ -1,15 +1,14 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "../ast/ast.h"
 #include "../lexer/lexer.h"
 #include <stdbool.h>
 
-#define EBNF_PATH "../../../grammar.ebnf"
-
 typedef struct {
   Lexer *lexer;
-  TokenType curr;
-  TokenType prev;
+  Token curr;
+  Token prev;
   bool err_flag;
 } Parser;
 
@@ -27,10 +26,12 @@ void parser_expect(Parser *p, TokenType kind, const char *msg);
 void parser_error_at_current(Parser *p, const char *msg);
 
 // grammar -> syntax
-void parse_program(Parser *p);
-void parse_statement(Parser *p);
-void parse_expression(Parser *p);
-void parse_term(Parser *p);
-void parse_factor(Parser *p);
+// these return void for now
+// when you add AST: change to ASTNode*
+ASTNode *parse_program(Parser *p);
+ASTNode *parse_statement(Parser *p);
+ASTNode *parse_expression(Parser *p);
+ASTNode *parse_term(Parser *p);
+ASTNode *parse_factor(Parser *p);
 
 #endif

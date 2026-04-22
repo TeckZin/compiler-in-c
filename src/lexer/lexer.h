@@ -1,6 +1,8 @@
 #ifndef LEXER_H
 #define LEXER_H
 
+#include <stdbool.h>
+
 typedef enum {
   TOKEN_EOF = -1,
   TOKEN_NEW_LINE = 0,
