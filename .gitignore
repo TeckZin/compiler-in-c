@@ -1,0 +1,29 @@
+# Executables
+*.out
+*.exe
+*.app
+*.bin
+compiler
+test_all
+test_lexer
+test_parser
+test_ast
+test_semantic
+
+# Object files
+*.o
+*.obj
+
+# Libraries
+*.a
+*.so
+*.dylib
+
+# Debug
+*.dSYM/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+

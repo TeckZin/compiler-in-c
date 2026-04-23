@@ -25,13 +25,10 @@ void parser_expect(Parser *p, TokenType kind, const char *msg);
 // errors
 void parser_error_at_current(Parser *p, const char *msg);
 
-// grammar -> syntax
-// these return void for now
-// when you add AST: change to ASTNode*
+// grammar -> syntax + AST
 ASTNode *parse_program(Parser *p);
 ASTNode *parse_statement(Parser *p);
 ASTNode *parse_expression(Parser *p);
 ASTNode *parse_term(Parser *p);
-ASTNode *parse_factor(Parser *p);
 
 #endif

@@ -6,16 +6,20 @@
 typedef enum {
   TOKEN_EOF = -1,
   TOKEN_NEW_LINE = 0,
-  TOKEN_INDENT = 2,
-  TOKEN_ASSIGN,
+
+  TOKEN_IDENT = 2,
   TOKEN_INT,
   TOKEN_STRING,
 
   // keywords
-  TOKEN_IF = 101,
+  TOKEN_LET = 101,
+  TOKEN_VAR,
+  TOKEN_IF,
   TOKEN_WHILE,
   TOKEN_RETURN,
-  TOKEN_EQUAL,
+
+  // symbols
+  TOKEN_EQUAL = 201,
   TOKEN_NOT_EQUAL,
   TOKEN_SEMICOLON,
   TOKEN_LEFT_PAREN,
@@ -24,7 +28,7 @@ typedef enum {
   TOKEN_RIGHT_BRACE,
 
   // ops
-  TOKEN_PLUS = 201,
+  TOKEN_PLUS = 301,
   TOKEN_MINUS,
   TOKEN_MULTIPLY,
   TOKEN_DIVIDE,
@@ -49,12 +53,12 @@ typedef struct {
 } Token;
 
 void lexer_init(Lexer *l, const char *src);
-
 char next_char(Lexer *l);
 char peek(Lexer *l);
 void abort_token(Lexer *l, char *msg);
 TokenType get_token(Lexer *l);
 void skip_white_space(Lexer *l);
-bool is_digit(char s);
+bool is_digit(char c);
+bool is_alpha(char c);
 
 #endif
