@@ -1,6 +1,7 @@
 #ifndef IR_H
 #define IR_H
 
+#include <stdio.h>
 typedef enum {
   IR_MOV,
   IR_ADD,
@@ -27,6 +28,8 @@ typedef struct {
 IRInstr *ir_new_instr(IROp op, int dest, int src1, int src2);
 
 void ir_list_add(IRList *list, IRInstr *instr);
+
+void ir_print_to_asm(IRInstr *instr, FILE *output);
 
 void ir_print(IRInstr *instr);
 

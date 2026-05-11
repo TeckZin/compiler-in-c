@@ -20,6 +20,27 @@ void ir_list_add(IRList *list, IRInstr *instr) {
   list->count++;
 }
 
+void ir_print_to_asm(IRInstr *instr, FILE *output) {
+  switch (instr->op) {
+  case IR_MOV:
+    fprintf(output, "    mov rax, %d\n", instr->src1);
+    break;
+  case IR_ADD:
+    fprintf(output, "    add rax, rbx\n");
+    break;
+  case IR_SUB:
+    fprintf(output, "    sub rax, rbx\n");
+    break;
+  case IR_MUL:
+    fprintf(output, "    imul rax, rbx\n");
+    break;
+  case IR_DIV:
+    fprintf(output, "    cdq\n");
+    fprintf(output, "    idiv rbx\n");
+    break;
+  }
+}
+
 void ir_print(IRInstr *instr) {
   printf("instr: op:%d, dest:%d, src1:%d, src2:%d\n", instr->op, instr->dest,
          instr->src1, instr->src2);
