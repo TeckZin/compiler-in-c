@@ -11,11 +11,20 @@ void codegen_init(CodeGen *cg, IRList *ir, FILE *output) {
 }
 
 void codegen_emit(CodeGen *cg) {
+  fprintf(cg->output, "section .text\n");
+  fprintf(cg->output, "global main\n");
+  fprintf(cg->output, "main:\n");
+  fprintf(cg->output, "    push rbp\n");
+  fprintf(cg->output, "    mov rbp, rsp\n");
+  fprintf(cg->output, "    sub rsp, 256\n");
 
-  IRInstr **items = cg->ir->items;
   for (int i = 0; i < cg->ir->count; i++) {
-    IRInstr *isntr = items[i];
-    ir_print_to_asm(isntr, cg->output);
+    IRInstr *instr = cg->ir->items[i];
+    ir_print_to_asm(instr, cg->output);
   }
+
+  fprintf(cg->output, "    mov rax, 0\n");
+  fprintf(cg->output, "    leave\n");
+  fprintf(cg->output, "    ret\n");
 }
 void codegen_free(CodeGen *cg) {}

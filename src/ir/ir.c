@@ -23,20 +23,50 @@ void ir_list_add(IRList *list, IRInstr *instr) {
 void ir_print_to_asm(IRInstr *instr, FILE *output) {
   switch (instr->op) {
   case IR_MOV:
-    fprintf(output, "    mov rax, %d\n", instr->src1);
+    if (instr->src1 >= 0) {
+      fprintf(output, "    mov rax, [rbp-%d]\n", (instr->src1 + 1) * 8);
+    } else {
+      if (instr->dest >= 0) {
+        fprintf(output, "    mov rax, %d\n", instr->src1);
+        fprintf(output, "    mov [rbp-%d], rax\n", (instr->dest + 1) * 8);
+      } else {
+      }
+    }
+    if (instr->dest < 0) {
+      if (instr->src1 >= 0) {
+        fprintf(output, "    mov rax, [rbp-%d]\n", (instr->src1 + 1) * 8);
+      }
+      fprintf(output, "    mov [rbp-%d], rax\n", (-(instr->dest) + 100) * 8);
+    }
     break;
+
   case IR_ADD:
+    fprintf(output, "    mov rax, [rbp-%d]\n", (instr->src1 + 1) * 8);
+    fprintf(output, "    mov rbx, [rbp-%d]\n", (instr->src2 + 1) * 8);
     fprintf(output, "    add rax, rbx\n");
+    fprintf(output, "    mov [rbp-%d], rax\n", (instr->dest + 1) * 8);
     break;
+
   case IR_SUB:
+    fprintf(output, "    mov rax, [rbp-%d]\n", (instr->src1 + 1) * 8);
+    fprintf(output, "    mov rbx, [rbp-%d]\n", (instr->src2 + 1) * 8);
     fprintf(output, "    sub rax, rbx\n");
+    fprintf(output, "    mov [rbp-%d], rax\n", (instr->dest + 1) * 8);
     break;
+
   case IR_MUL:
+    fprintf(output, "    mov rax, [rbp-%d]\n", (instr->src1 + 1) * 8);
+    fprintf(output, "    mov rbx, [rbp-%d]\n", (instr->src2 + 1) * 8);
     fprintf(output, "    imul rax, rbx\n");
+    fprintf(output, "    mov [rbp-%d], rax\n", (instr->dest + 1) * 8);
     break;
+
   case IR_DIV:
+    fprintf(output, "    mov rax, [rbp-%d]\n", (instr->src1 + 1) * 8);
+    fprintf(output, "    mov rbx, [rbp-%d]\n", (instr->src2 + 1) * 8);
     fprintf(output, "    cdq\n");
     fprintf(output, "    idiv rbx\n");
+    fprintf(output, "    mov [rbp-%d], rax\n", (instr->dest + 1) * 8);
     break;
   }
 }
